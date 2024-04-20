@@ -37,7 +37,7 @@ $bot = new RubinoPHP("َAUTH"); // Login web2.rubika.ir and get AUTH Rubino Tab
 require_once(
     './rubino/rubino.php'
 );
-$bot = new RubinoPHP("َAUTH");
+$bot = new RubinoPHP("AUTH");
 
 print_r($bot->getPostByShareLink("https://rubika.ir/post/pdhDVDMDXw"));
 
@@ -81,7 +81,7 @@ require_once(
     './network/exception.php'
 );
 
-$bot = new RubinoPHP("َAUTH");
+$bot = new RubinoPHP("AUTH");
 
 try {
     print_r($bot->getMyProfileInfo());
