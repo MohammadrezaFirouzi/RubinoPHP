@@ -57,7 +57,7 @@ require_once(
 #### مثال :
 
 ```php
-catch(InvalidInput $e){}
+}catch(InvalidInput $e){}
 
 catch(NotRegistered $e){}
 
