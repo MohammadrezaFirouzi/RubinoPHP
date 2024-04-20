@@ -48,7 +48,7 @@ print_r($bot->getPostByShareLink("https://rubika.ir/post/pdhDVDMDXw"));
 
 ## مدیریت خطا ها :
 
-#### اضافه کردن کلاس خطا ها به پروژه
+#### اضافه کردن کلاس به پروژه
 ```php
 require_once(
     './rubino/exception.php'
@@ -68,9 +68,7 @@ catch(TooRequests $e){}
 
 
 ## همگام سازی یک مثال دیگر :
-```php
-<?php 
-
+```php 
 <?php
 
 
