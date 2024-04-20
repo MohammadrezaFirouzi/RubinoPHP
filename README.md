@@ -25,7 +25,7 @@ require_once(
 require_once(
     './rubino/rubino.php'
 );
-$bot = new RubinoPHP("َAUTH"); // Login web2.rubika.ir and get AUTH Rubino Tab
+$bot = new RubinoPHP("AUTH"); // Login web2.rubika.ir and get AUTH Rubino Tab
 
 ```
 
