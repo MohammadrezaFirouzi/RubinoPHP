@@ -34,27 +34,67 @@ function request($data)
     $result = json_decode($response, true);
 
     if ($status == 200) {
-        if($result['status_det'] == "OK"){
+        if ($result['status_det'] == "OK") {
             return $result;
-        }
-        else{
+        } else {
             $exceptionsMapping = [
                 "INVALID_AUTH" => new InvalidAuth(),
                 "NOT_REGISTERED" => new NotRegistered(),
                 "INVALID_INPUT" => new InvalidInput(),
                 "TOO_REQUESTS" => new TooRequests(),
             ];
-            
+
             if (array_key_exists($result["status_det"], $exceptionsMapping)) {
                 throw $exceptionsMapping[$result["status_det"]];
             } else {
                 throw new Exception("Unknown status detail.");
             }
         }
-        
-        
-    } else {
+    }
+}
 
-        
+function sendRequest($data)
+{
+    $ch = curl_init(getServer());
+
+    curl_setopt_array($ch, [
+        CURLOPT_RETURNTRANSFER => true,
+        CURLOPT_POST => true,
+        CURLOPT_SSL_VERIFYPEER => false,
+        CURLOPT_IPRESOLVE => CURL_IPRESOLVE_V4,
+        CURLOPT_HTTPHEADER => [
+            "Accept-Encoding: gzip",
+            "Connection: Keep-Alive",
+            "User-Agent: okhttp/3.12.1",
+            "Referer: https://web.rubika.ir/",
+            "Content-Type: application/json; charset=utf-8"
+        ],
+        CURLOPT_POSTFIELDS => json_encode($data)
+    ]);
+
+    $response = curl_exec($ch);
+
+    $status = curl_getinfo($ch, CURLINFO_HTTP_CODE);
+    curl_close($ch);
+
+    $result = json_decode($response, true);
+
+    if ($status == 200) {
+        if ($result['status_det'] == "OK") {
+            return $result;
+        } else {
+            $exceptionsMapping = [
+                "INVALID_AUTH" => new InvalidAuth(),
+                "NOT_REGISTERED" => new NotRegistered(),
+                "INVALID_INPUT" => new InvalidInput(),
+                "TOO_REQUESTS" => new TooRequests(),
+            ];
+
+            if (array_key_exists($result["status_det"], $exceptionsMapping)) {
+                throw $exceptionsMapping[$result["status_det"]];
+            } else {
+                throw new Exception("Unknown status detail.");
+            }
+        }
     }
 }
